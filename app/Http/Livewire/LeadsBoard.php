@@ -23,11 +23,18 @@ class LeadsBoard extends LivewireStatusBoard
         $this->validate([
             'lead.raison_social' => 'required',
             'lead.current_status' => 'required',
+            'lead.numéro_de_téléphone' => 'required',
+            'lead.email' => 'required',
+
         ]);
 
         $lead= new Lead();
         $lead->raison_social=$this->lead['raison_social'];
         $lead->current_status=$this->lead['current_status'];
+        $lead->numéro_de_téléphone=$this->lead['numéro_de_téléphone'];
+        $lead->email=$this->lead['email'];
+
+
         $lead->save();
 
         $this->dispatchBrowserEvent('close_modal', ['id' => 'store_lead']);
@@ -73,6 +80,8 @@ class LeadsBoard extends LivewireStatusBoard
                 'id' => $lead->id,
                 'title' => $lead->raison_social,
                 'status' => $lead->current_status,
+                'num_tel' => $lead->numéro_de_téléphone,
+                'email' => $lead->email,
             ]);
         }
         return $collection;

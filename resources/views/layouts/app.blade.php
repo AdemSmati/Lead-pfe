@@ -24,8 +24,9 @@
 </head>
 
 
-<body>
-    <div id="app">
+<body style="background: rgb(56,59,95);
+background: linear-gradient(90deg, rgba(56,59,95,1) 0%, rgba(49,59,151,1) 35%, rgba(71,161,180,1) 100%);">
+    <div style="margin-top: 0px" id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">

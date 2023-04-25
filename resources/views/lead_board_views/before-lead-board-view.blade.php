@@ -24,6 +24,18 @@
 
                         </div>
                         <div class="form-group">
+                            <label for="exampleFormControlInput1">numero de telephone</label>
+                            <input type="text" wire:model.defer="lead.numéro_de_téléphone" class="form-control" id="exampleFormControlInput1" placeholder="numéro de téléphone">
+                            @error('lead.raison_social') <span class="error">{{ $message }}</span> @enderror
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">numero de telephone</label>
+                            <input type="text" wire:model.defer="lead.email" class="form-control" id="exampleFormControlInput1" placeholder="email">
+                            @error('lead.raison_social') <span class="error">{{ $message }}</span> @enderror
+
+                        </div>
+                        <div class="form-group">
                             <label for="exampleFormControlSelect1">Selectionner etat</label>
                             <select wire:model.defer="lead.current_status" class="form-control" id="exampleFormControlSelect1">
                                 @foreach($status as $s)

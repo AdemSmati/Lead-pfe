@@ -27,3 +27,6 @@ Route::get('user/home', [\App\Http\Controllers\User\HomeController::class, 'inde
 Route::get('/leads', function () {
     return view('leads');
 })->name('leads');
+Route::get('/dasboard', function () {
+    return view('dashboardTest');
+});
