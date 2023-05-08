@@ -30,3 +30,13 @@ Route::get('/leads', function () {
 Route::get('/dasboard', function () {
     return view('dashboardTest');
 });
+Route::get('/manage', function () {
+    return view('auth.manage_comercials');
+})->name('manage');
+Route::get('/testt', function (){
+    return view('testo.listTest');
+});
+Route::get('/assign', function () {
+    return view('auth.assign');
+})->name('assign');
+
