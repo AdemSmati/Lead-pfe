@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
+<div>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -261,11 +258,6 @@
             });
         });
     </script>
-</head>
-<body>
-@extends('layouts.app')
-@section('content')
-
 <div class="container" style="margin-right: 0px;margin-top: 0px; ">
     <div class="table-responsive">
         <div class="table-wrapper">
@@ -276,17 +268,16 @@
                     </div>
                     <div class="col-xs-6">
                         <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
-                        <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>
+                        <button class="btn btn-danger" wire:click.prevent="deleteSelected" {{ empty($selected) ? 'disabled' : '' }}><i class="material-icons">&#xE15C;</i> <span>Delete</span></button>
                     </div>
                 </div>
             </div>
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
-
+                    <th><input type="checkbox" wire:model="allSelected"></th>
                     <th>Name</th>
                     <th>Email</th>
-
                     <th>Leads</th>
                     <th>Actions</th>
                 </tr>
@@ -294,25 +285,19 @@
                 <tbody>
                 @foreach ($commercials as $commercial)
                     <tr>
+                        <td><input type="checkbox" wire:model="selected" value="{{ $commercial->id }}"></td>
                         <td>{{ $commercial->name }}</td>
                         <td>{{ $commercial->email }}</td>
-                        <td>
-                            <ul>
-                                @foreach ($commercial->leads as $lead)
-                                    <li>{{ $lead->raison_social }}</li>
-                                @endforeach
-                            </ul>
-                        </td>
+                        <td>{{ $commercial->numero_telephone }}</td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
 
         </div>
-    </div>
 </div>
 <!-- Edit Modal HTML -->
-<div id="addEmployeeModal" class="modal fade">
+<div wire:ignore.self id="addEmployeeModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <form wire:submit.prevent="storeUser">
@@ -332,6 +317,10 @@
                     <div class="form-group">
                         <label>Password</label>
                         <input type="text" wire:model.defer="user.password" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Numéro de téléphone</label>
+                        <input type="text" wire:model.defer="user.numero_telephone" class="form-control" required>
                     </div>
 
                 </div>
@@ -402,12 +391,12 @@
 <script>
     window.addEventListener('close_modal', event => {
         console.log('test1')
-        $('#store_User').hide();
+        $('#addEmployeeModal').hide();
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
     })
 </script>
 
-@endsection
-</body>
-</html>
+
+</div>
+</div>

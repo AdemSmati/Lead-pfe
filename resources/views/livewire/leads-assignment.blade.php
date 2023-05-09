@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap CRUD Data Table for Database with Modal Form</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<div>
     <style>
         body {
             color: #566787;
@@ -261,11 +248,6 @@
             });
         });
     </script>
-</head>
-<body>
-@extends('layouts.app')
-@section('content')
-
     <div class="container" style="margin-right: 0px;margin-top: 0px; ">
         <div class="table-responsive">
             <div class="table-wrapper">
@@ -311,48 +293,51 @@
         </div>
     </div>
     <!-- Edit Modal HTML -->
-    <div id="addLead" class="modal fade">
+    <div wire:ignore.self id="addLead" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form wire:submit.prevent="assignLead">
+                <form wire:submit.prevent="assign">
                     <div class="modal-header">
                         <h4 class="modal-title">Add Lead</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <select wire:model.defer="userr.name" class="form-control" id="exampleFormControlSelect1">
-                                @foreach($users as $u)
-                                    <option value="{{$u->id}}">{{$u->name}}</option>
+                            <select wire:model.defer="lead.commercial_id" class="form-control" >
+                                <option value="">Choisir commercial</option>
+                                @foreach($users as $user)
+                                    <option value="{{$user->id}}">{{$user->name}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Raison social</label>
                             <input type="text" wire:model.defer="lead.raison_social" class="form-control" id="exampleFormControlInput1" placeholder="Raison social">
-                            @error('lead.raison_social') <span class="error">{{ $message }}</span> @enderror
+
 
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">numero de telephone</label>
-                            <input type="text" wire:model.defer="lead.numéro_de_téléphone" class="form-control" id="exampleFormControlInput1" placeholder="numéro de téléphone">
-                            @error('lead.raison_social') <span class="error">{{ $message }}</span> @enderror
+                            <input type="number" wire:model.defer="lead.num_tel" class="form-control" id="exampleFormControlInput1" placeholder="numéro de téléphone">
+
 
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">numero de telephone</label>
-                            <input type="text" wire:model.defer="lead.email" class="form-control" id="exampleFormControlInput1" placeholder="email">
-                            @error('lead.raison_social') <span class="error">{{ $message }}</span> @enderror
+                            <input type="email" wire:model.defer="lead.email" class="form-control" id="exampleFormControlInput1" placeholder="email">
+
 
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Selectionner etat</label>
                             <select wire:model.defer="lead.current_status" class="form-control" id="exampleFormControlSelect1">
+
+                                <option value="">Choisir etat</option>
                                 @foreach($status as $s)
                                     <option value="{{$s->id}}">{{$s->nom_status}}</option>
                                 @endforeach
                             </select>
-                            @error('lead.current_status') <span class="error">{{ $message }}</span> @enderror
+
 
                         </div>
 
@@ -423,13 +408,10 @@
     </div>
     <script>
         window.addEventListener('close_modal', event => {
-            console.log('test1')
-            $('#store_User').hide();
+            console.log('test')
+            $('#addLead').hide();
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
         })
     </script>
-
-@endsection
-</body>
-</html>
+</div>

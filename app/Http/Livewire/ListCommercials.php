@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class ListCommercials extends Component
 {
-
+    public $selected = [];
     public $user = [
         'name' => '',
         'email' => '',
@@ -28,6 +28,8 @@ class ListCommercials extends Component
             'user.name' => 'required',
             'user.email' => 'required',
             'user.password' => 'required',
+            'user.numero_telephone' => 'required',
+
 
         ]);
 
@@ -36,14 +38,21 @@ class ListCommercials extends Component
         $user->email = $this->user['email'];
         $user->password = $this->user['password'];
         $user->password = Hash::make($this->user['password']);
+        $user->numero_telephone = $this->user['numero_telephone'];
 
         $user->save();
 
 
 
 
-        $this->dispatchBrowserEvent('close_modal', ['id' => 'store_User']);
+        $this->dispatchBrowserEvent('close_modal', ['id' => 'addEmployeeModal']);
         $this->reset('user');
+        $this->emit('refreshComponent');
+    }
+    public function deleteSelected()
+    {
+        User::whereIn('id', $this->selected)->delete();
+        $this->selected = [];
         $this->emit('refreshComponent');
     }
 }

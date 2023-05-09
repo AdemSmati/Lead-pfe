@@ -100,7 +100,9 @@ background: linear-gradient(90deg, rgba(56,59,95,1) 0%, rgba(49,59,151,1) 35%, r
                     </ul>
                 </div>
             </div>
+            <div class="col-md-10">
             @yield('content')
+            </div>
         </div>
 
         <main class="py-4">
